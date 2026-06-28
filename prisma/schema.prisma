@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  notes     Note[]
+  createdAt DateTime @default(now())
+}
+
+model Note {
+  id         String      @id @default(cuid())
+  userId     String
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title      String
+  content    String
+  shareLinks ShareLink[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+model ShareLink {
+  id           String     @id @default(cuid())
+  noteId       String
+  note         Note       @relation(fields: [noteId], references: [id], onDelete: Cascade)
+  token        String     @unique
+  shareType    ShareType
+  accessType   AccessType
+  passwordHash String?
+  expiresAt    DateTime?
+  usedAt       DateTime?
+  isRevoked    Boolean    @default(false)
+  viewCount    Int        @default(0)
+  createdAt    DateTime   @default(now())
+}
+
+enum ShareType {
+  ONE_TIME
+  TIME_BASED
+}
+
+enum AccessType {
+  PUBLIC
+  PASSWORD_PROTECTED
+}
