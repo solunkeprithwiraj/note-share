@@ -17,6 +17,9 @@ export async function SiteHeader() {
         <nav className="flex items-center gap-4 text-sm text-muted-foreground">
           {user ? (
             <>
+              <Link href="/notes" className="hover:text-foreground">
+                My notes
+              </Link>
               <Link href="/notes/new" className="hover:text-foreground">
                 New note
               </Link>
