@@ -70,6 +70,7 @@ export async function POST(
     },
   });
 
-  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/share/${token}`;
+  const base = process.env.NEXT_PUBLIC_BASE_URL?.replace(/\/+$/, "");
+  const url = `${base}/share/${token}`;
   return Response.json({ url, accessKey }, { status: 201 });
 }
