@@ -3,6 +3,7 @@
 A note-taking app where every note can be shared through a **secure, expiring link**. Links can be one-time or time-based, public or password-protected, and can be force-revoked at any time. View counts are tracked accurately and the one-time flow is safe under concurrent access.
 
 **Live demo:** https://note-share-iota.vercel.app
+**Demo video:** https://drive.google.com/file/d/13XM9-pNDvwvbbUzbbPU77Plh8tLEnwXD/view?usp=sharing
 **Test credentials:** `demo@noteshare.app` / `DemoPass123`
 
 ---
